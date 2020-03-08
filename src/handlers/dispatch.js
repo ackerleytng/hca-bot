@@ -1,7 +1,7 @@
 import sendMessage from '../common/sendMessage.js';
 import { getByChatId } from '../common/database.js';
-import commands from '../common/commands.js';
 import parse from '../common/parse.js';
+import commands from './commands.js';
 
 
 const lookup = {
@@ -15,6 +15,7 @@ const handleReply = async (chatId, text) => {
 
   if (state) {
     const fn = lookup[state];
+
     if (!fn) {
       await sendMessage(chatId, `Invalid state ${state}!`);
     } else {

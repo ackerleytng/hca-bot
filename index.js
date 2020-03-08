@@ -1,5 +1,5 @@
 import sendDebugMessage from './src/common/sendDebugMessage.js';
-import dispatch from './src/common/dispatch.js';
+import dispatch from './src/handlers/dispatch.js';
 
 
 async function handleRequest(event) {
