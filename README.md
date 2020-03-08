@@ -2,7 +2,7 @@
 
 Here's the code for a bot for HCA Hospice Care.
 
-It allows patients and their families to sign up with the telegram bot so for updates from HCA.
+It allows patients and their families to sign up with the Telegram bot for updates from HCA.
 
 ## Developing
 
