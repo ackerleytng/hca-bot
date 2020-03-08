@@ -1,0 +1,5 @@
+name = "hca-bot"
+type = "webpack"
+account_id = "<fill in account id here>"
+workers_dev = true
+webpack_config = "webpack.config.json"

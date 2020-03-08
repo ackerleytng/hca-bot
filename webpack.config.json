@@ -1,0 +1,7 @@
+{
+  "target": "webworker",
+  "entry": "./index.js",
+  "optimization": {
+    "minimize": false
+  }
+}
