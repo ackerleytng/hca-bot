@@ -34,10 +34,17 @@ export const doStartSetName = async (chatId, name) => {
 export const doStartSetPatientId = async (chatId, text) => {
   const patientId = Number(text);
 
-  await createOrUpdate(chatId, {
-    'Patient ID': patientId,
-    'State': null
-  });
-  return await sendMessage(
-    chatId, 'Thank you for registering! HCA will be using this chat to provide you with updates.');
+  if (patientId) {
+    await createOrUpdate(chatId, {
+      'Patient ID': patientId,
+      'State': null
+    });
+    return await sendMessage(
+      chatId, 'Thank you for registering! HCA will be using this chat to provide you with updates.');
+  } else {
+    return await sendMessage(
+      chatId,
+      'The patient\'s HCA ID must be a number!'
+    );
+  }
 };
