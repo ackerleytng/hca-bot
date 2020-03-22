@@ -17,14 +17,14 @@ async function handleRequest(event) {
       const body = await event.request.json();
       ret = await handleMessage(body);
     } else {
-      ret = "Unknown endpoint";
+      ret = 'Unknown endpoint';
     }
   } catch (err) {
     // Without event.waitUntil(), our fetch() to our logging service may
     // or may not complete.
     event.waitUntil(sendDebugMessage({errorStack: err.stack}));
 
-    ret = err.stack || "No error stack!";
+    ret = err.stack || 'No error stack!';
   }
 
   return new Response(JSON.stringify(ret), {
