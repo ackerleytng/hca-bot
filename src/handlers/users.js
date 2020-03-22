@@ -1,6 +1,6 @@
 import { listRecords } from '../common/database.js';
 
-const handleListUsers = async () => {
+const listUsers = async () => {
   const users = await listRecords();
 
   return users.map((r) => ({
@@ -11,4 +11,4 @@ const handleListUsers = async () => {
   }))
 }
 
-export default handleListUsers;
+export default listUsers;
