@@ -3,6 +3,38 @@ const airtableUrl = `https://api.airtable.com/v0/${airtableBaseId}/${tableId}`;
 const headers = { Authorization: `Bearer ${airtableApiKey}`, 'Content-Type': 'application/json' }
 
 
+export const doListRecords = async (offset) => {
+  const p = {
+    view: 'Grid view',
+  }
+
+  if (offset) {
+    p.offset = offset
+  }
+
+  const params = new URLSearchParams(p);
+  const url = `${airtableUrl}?${params.toString()}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers
+  });
+
+  return response.json();
+}
+
+export const listRecords = async () => {
+  const records = [];
+
+  let offset = null;
+  do {
+    const page = await doListRecords(offset);
+    records.push(...page.records);
+    offset = page.offset;
+  } while (offset);
+
+  return records;
+}
+
 export const getByChatId = async (chatId) => {
   const params = new URLSearchParams({
     maxRecords: 1,
@@ -51,3 +83,5 @@ export const createOrUpdate = async (chatId, fields) => {
     await create(chatId, fields);
   }
 };
+
+// export const testables = { doListRecords };
