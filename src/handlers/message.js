@@ -11,7 +11,9 @@ const buildUserLookup = async () => {
   return Object.fromEntries(users.map(u => [u.chatId, u]));
 };
 
-const buildMessage = (message, user) => message.replace('{{ Name }}', user.name);
+const buildMessage = (message, user) => message
+      .replace('{{ Name }}', user.name)
+      .replace('{{ Patient Name }}', user.patientName);
 
 const sendAll = async (message, users) => {
   const promises = users.map((u) => sendMessage(u.chatId, buildMessage(message, u)));

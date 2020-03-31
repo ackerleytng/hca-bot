@@ -4,7 +4,7 @@ const { validSendMessageRequest, buildMessage } = testables;
 
 test('validSendMessageRequest should work', () => {
   const valid = {
-    message: 'Dear {{ Name }}, you are great!',
+    message: 'Dear {{ Name }}, hope you and {{ Patient Name }} are doing great!',
     chatIds: ['21342', '12345']
   };
   expect(validSendMessageRequest(valid)).toBeTruthy();
