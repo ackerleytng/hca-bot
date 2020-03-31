@@ -6,6 +6,7 @@ import commands from './commands.js';
 
 const lookup = {
   SENT_NAME_REQ: commands.doSetName,
+  SENT_PATIENT_NAME_REQ: commands.doSetPatientName,
   SENT_HAH_NUM_REQ: commands.doSetHahNum,
   START_SENT_NAME_REQ: commands.doStartSetName,
   START_SENT_PATIENT_NAME_REQ: commands.doStartSetPatientName,
