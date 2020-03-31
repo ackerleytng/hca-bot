@@ -1,4 +1,5 @@
 import sendMessage from '../common/sendMessage.js';
+import sendDebugMessage from '../common/sendDebugMessage.js';
 import { getByChatId } from '../common/database.js';
 import parse from '../common/parse.js';
 import commands from './commands.js';
@@ -13,6 +14,8 @@ const lookup = {
   START_SENT_HAH_NUM_REQ: commands.doStartSetHahNum,
 };
 
+const catchAllMessage = (text) => `Not sure what you mean with ${text}. If you have any comments or messages, please contact ${coordinatorName} @ ${coordinatorPhoneNumber} on ${coordinatorContactPlatforms}. Thank you!`;
+
 const handleReply = async (chatId, text) => {
   const record = await getByChatId(chatId);
   const state = record.fields['State'];
@@ -21,15 +24,12 @@ const handleReply = async (chatId, text) => {
     const fn = lookup[state];
 
     if (!fn) {
-      await sendMessage(chatId, `Invalid state ${state}!`);
+      await sendDebugMessage(`Invalid state ${state}!`);
     } else {
       await fn(chatId, text);
     }
   } else {
-    await sendMessage(
-      chatId,
-      `Not sure what you mean when you say ${text}!`
-    );
+    await sendMessage(chatId, catchAllMessage(text));
   }
 };
 
@@ -45,7 +45,7 @@ const dispatch = async (body) => {
 
     if (command) {
       if (!validCommand(command)) {
-        await sendMessage(chatId, `Not sure what you meant with ${text}!`);
+        await sendMessage(chatId, catchAllMessage(text));
       } else {
         await commands[command](chatId, parsed);
       }
