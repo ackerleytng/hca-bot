@@ -8,8 +8,8 @@ const menu = [
     callback_data: 'name'
   }],
   [{
-    text: 'Set/Change Patient ID',
-    callback_data: 'patientId'
+    text: 'Set/Change HAH Number',
+    callback_data: 'hahNum'
   }],
 ];
 
@@ -25,18 +25,31 @@ export const start = async (chatId) => {
 export const doStartSetName = async (chatId, name) => {
   await createOrUpdate(chatId, {
     'Name': name,
-    'State': 'START_SENT_PATIENT_ID_REQ'
+    'State': 'START_SENT_PATIENT_NAME_REQ'
   });
   return await sendMessage(
-    chatId, `Hello ${name}, what is the patient's HCA ID number?`);
+    chatId,
+    `Hi ${name}, what is the patient's name? `
+  );
 };
 
-export const doStartSetPatientId = async (chatId, text) => {
-  const patientId = Number(text);
+export const doStartSetPatientName = async (chatId, name) => {
+  await createOrUpdate(chatId, {
+    'Patient Name': name,
+    'State': 'START_SENT_HAH_NUM_REQ'
+  });
+  return await sendMessage(
+    chatId,
+    `What is ${name}'s HAH Number? (You can find it on the front of your blue file)`
+  );
+};
 
-  if (patientId) {
+export const doStartSetHahNum = async (chatId, text) => {
+  const hahNum = Number(text);
+
+  if (hahNum) {
     await createOrUpdate(chatId, {
-      'Patient ID': patientId,
+      'HAH Number': hahNum,
       'State': null
     });
     return await sendMessage(
@@ -44,7 +57,7 @@ export const doStartSetPatientId = async (chatId, text) => {
   } else {
     return await sendMessage(
       chatId,
-      'The patient\'s HCA ID must be a number!'
+      'The patient\'s HAH number must be a number! Please enter the HAH number.'
     );
   }
 };

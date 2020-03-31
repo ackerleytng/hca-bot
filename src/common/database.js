@@ -83,5 +83,3 @@ export const createOrUpdate = async (chatId, fields) => {
     await create(chatId, fields);
   }
 };
-
-// export const testables = { doListRecords };

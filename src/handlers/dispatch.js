@@ -6,9 +6,10 @@ import commands from './commands.js';
 
 const lookup = {
   SENT_NAME_REQ: commands.doSetName,
-  SENT_PATIENT_ID_REQ: commands.doSetPatientId,
+  SENT_HAH_NUM_REQ: commands.doSetHahNum,
   START_SENT_NAME_REQ: commands.doStartSetName,
-  START_SENT_PATIENT_ID_REQ: commands.doStartSetPatientId,
+  START_SENT_PATIENT_NAME_REQ: commands.doStartSetPatientName,
+  START_SENT_HAH_NUM_REQ: commands.doStartSetHahNum,
 };
 
 const handleReply = async (chatId, text) => {
